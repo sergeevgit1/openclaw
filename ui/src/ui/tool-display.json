@@ -115,7 +115,7 @@
     },
     "nodes": {
       "icon": "smartphone",
-      "title": "Nodes",
+      "title": "Узлы",
       "actions": {
         "status": { "label": "status" },
         "describe": { "label": "describe", "detailKeys": ["node", "nodeId"] },
