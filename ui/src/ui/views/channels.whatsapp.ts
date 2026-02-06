@@ -15,42 +15,42 @@ export function renderWhatsAppCard(params: {
   return html`
     <div class="card">
       <div class="card-title">WhatsApp</div>
-      <div class="card-sub">Link WhatsApp Web and monitor connection health.</div>
+      <div class="card-sub">Привязка WhatsApp Web и мониторинг состояния подключения.</div>
       ${accountCountLabel}
 
       <div class="status-list" style="margin-top: 16px;">
         <div>
-          <span class="label">Configured</span>
-          <span>${whatsapp?.configured ? "Yes" : "No"}</span>
+          <span class="label">Настроен</span>
+          <span>${whatsapp?.configured ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Linked</span>
-          <span>${whatsapp?.linked ? "Yes" : "No"}</span>
+          <span class="label">Привязан</span>
+          <span>${whatsapp?.linked ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Running</span>
-          <span>${whatsapp?.running ? "Yes" : "No"}</span>
+          <span class="label">Запущен</span>
+          <span>${whatsapp?.running ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Connected</span>
-          <span>${whatsapp?.connected ? "Yes" : "No"}</span>
+          <span class="label">Подключён</span>
+          <span>${whatsapp?.connected ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Last connect</span>
+          <span class="label">Последнее подключение</span>
           <span>
-            ${whatsapp?.lastConnectedAt ? formatAgo(whatsapp.lastConnectedAt) : "n/a"}
+            ${whatsapp?.lastConnectedAt ? formatAgo(whatsapp.lastConnectedAt) : "н/д"}
           </span>
         </div>
         <div>
-          <span class="label">Last message</span>
+          <span class="label">Последнее сообщение</span>
           <span>
-            ${whatsapp?.lastMessageAt ? formatAgo(whatsapp.lastMessageAt) : "n/a"}
+            ${whatsapp?.lastMessageAt ? formatAgo(whatsapp.lastMessageAt) : "н/д"}
           </span>
         </div>
         <div>
-          <span class="label">Auth age</span>
+          <span class="label">Возраст авторизации</span>
           <span>
-            ${whatsapp?.authAgeMs != null ? formatDuration(whatsapp.authAgeMs) : "n/a"}
+            ${whatsapp?.authAgeMs != null ? formatDuration(whatsapp.authAgeMs) : "н/д"}
           </span>
         </div>
       </div>
@@ -85,31 +85,31 @@ export function renderWhatsAppCard(params: {
           ?disabled=${props.whatsappBusy}
           @click=${() => props.onWhatsAppStart(false)}
         >
-          ${props.whatsappBusy ? "Working…" : "Show QR"}
+          ${props.whatsappBusy ? "Выполняется…" : "Показать QR"}
         </button>
         <button
           class="btn"
           ?disabled=${props.whatsappBusy}
           @click=${() => props.onWhatsAppStart(true)}
         >
-          Relink
+          Привязать заново
         </button>
         <button
           class="btn"
           ?disabled=${props.whatsappBusy}
           @click=${() => props.onWhatsAppWait()}
         >
-          Wait for scan
+          Ожидание сканирования
         </button>
         <button
           class="btn danger"
           ?disabled=${props.whatsappBusy}
           @click=${() => props.onWhatsAppLogout()}
         >
-          Logout
+          Выйти
         </button>
         <button class="btn" @click=${() => props.onRefresh(true)}>
-          Refresh
+          Обновить
         </button>
       </div>
 

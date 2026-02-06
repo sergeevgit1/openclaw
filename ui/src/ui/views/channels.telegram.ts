@@ -27,16 +27,16 @@ export function renderTelegramCard(params: {
         </div>
         <div class="status-list account-card-status">
           <div>
-            <span class="label">Running</span>
-            <span>${account.running ? "Yes" : "No"}</span>
+            <span class="label">Запущен</span>
+            <span>${account.running ? "Да" : "Нет"}</span>
           </div>
           <div>
-            <span class="label">Configured</span>
-            <span>${account.configured ? "Yes" : "No"}</span>
+            <span class="label">Настроен</span>
+            <span>${account.configured ? "Да" : "Нет"}</span>
           </div>
           <div>
-            <span class="label">Last inbound</span>
-            <span>${account.lastInboundAt ? formatAgo(account.lastInboundAt) : "n/a"}</span>
+            <span class="label">Последнее входящее</span>
+            <span>${account.lastInboundAt ? formatAgo(account.lastInboundAt) : "н/д"}</span>
           </div>
           ${
             account.lastError
@@ -55,7 +55,7 @@ export function renderTelegramCard(params: {
   return html`
     <div class="card">
       <div class="card-title">Telegram</div>
-      <div class="card-sub">Bot status and channel configuration.</div>
+      <div class="card-sub">Статус бота и конфигурация канала.</div>
       ${accountCountLabel}
 
       ${
@@ -68,24 +68,24 @@ export function renderTelegramCard(params: {
           : html`
             <div class="status-list" style="margin-top: 16px;">
               <div>
-                <span class="label">Configured</span>
-                <span>${telegram?.configured ? "Yes" : "No"}</span>
+                <span class="label">Настроен</span>
+                <span>${telegram?.configured ? "Да" : "Нет"}</span>
               </div>
               <div>
-                <span class="label">Running</span>
-                <span>${telegram?.running ? "Yes" : "No"}</span>
+                <span class="label">Запущен</span>
+                <span>${telegram?.running ? "Да" : "Нет"}</span>
               </div>
               <div>
-                <span class="label">Mode</span>
-                <span>${telegram?.mode ?? "n/a"}</span>
+                <span class="label">Режим</span>
+                <span>${telegram?.mode ?? "н/д"}</span>
               </div>
               <div>
-                <span class="label">Last start</span>
-                <span>${telegram?.lastStartAt ? formatAgo(telegram.lastStartAt) : "n/a"}</span>
+                <span class="label">Последний запуск</span>
+                <span>${telegram?.lastStartAt ? formatAgo(telegram.lastStartAt) : "н/д"}</span>
               </div>
               <div>
-                <span class="label">Last probe</span>
-                <span>${telegram?.lastProbeAt ? formatAgo(telegram.lastProbeAt) : "n/a"}</span>
+                <span class="label">Последняя проверка</span>
+                <span>${telegram?.lastProbeAt ? formatAgo(telegram.lastProbeAt) : "н/д"}</span>
               </div>
             </div>
           `
@@ -102,7 +102,7 @@ export function renderTelegramCard(params: {
       ${
         telegram?.probe
           ? html`<div class="callout" style="margin-top: 12px;">
-            Probe ${telegram.probe.ok ? "ok" : "failed"} ·
+            Проверка ${telegram.probe.ok ? "ок" : "не пройдена"} ·
             ${telegram.probe.status ?? ""} ${telegram.probe.error ?? ""}
           </div>`
           : nothing
@@ -112,7 +112,7 @@ export function renderTelegramCard(params: {
 
       <div class="row" style="margin-top: 12px;">
         <button class="btn" @click=${() => props.onRefresh(true)}>
-          Probe
+          Проверить
         </button>
       </div>
     </div>

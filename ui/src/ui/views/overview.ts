@@ -42,10 +42,10 @@ export function renderOverview(props: OverviewProps) {
     if (!hasToken && !hasPassword) {
       return html`
         <div class="muted" style="margin-top: 8px">
-          This gateway requires auth. Add a token or password, then click Connect.
+          Этот шлюз требует авторизации. Добавьте токен или пароль, затем нажмите Подключить.
           <div style="margin-top: 6px">
-            <span class="mono">openclaw dashboard --no-open</span> → open the Control UI<br />
-            <span class="mono">openclaw doctor --generate-gateway-token</span> → set token
+            <span class="mono">openclaw dashboard --no-open</span> → открыть панель управления<br />
+            <span class="mono">openclaw doctor --generate-gateway-token</span> → создать токен
           </div>
           <div style="margin-top: 6px">
             <a
@@ -54,7 +54,7 @@ export function renderOverview(props: OverviewProps) {
               target="_blank"
               rel="noreferrer"
               title="Control UI auth docs (opens in new tab)"
-              >Docs: Control UI auth</a
+              >Документация: авторизация панели управления</a
             >
           </div>
         </div>
@@ -62,7 +62,7 @@ export function renderOverview(props: OverviewProps) {
     }
     return html`
       <div class="muted" style="margin-top: 8px">
-        Auth failed. Update the token or password in Control UI settings, then click Connect.
+        Ошибка авторизации. Обновите токен или пароль в настройках панели управления, затем нажмите Подключить.
         <div style="margin-top: 6px">
           <a
             class="session-link"
@@ -70,7 +70,7 @@ export function renderOverview(props: OverviewProps) {
             target="_blank"
             rel="noreferrer"
             title="Control UI auth docs (opens in new tab)"
-            >Docs: Control UI auth</a
+            >Документация: авторизация панели управления</a
           >
         </div>
       </div>
@@ -90,11 +90,11 @@ export function renderOverview(props: OverviewProps) {
     }
     return html`
       <div class="muted" style="margin-top: 8px">
-        This page is HTTP, so the browser blocks device identity. Use HTTPS (Tailscale Serve) or open
-        <span class="mono">http://127.0.0.1:18789</span> on the gateway host.
+        Страница загружена по HTTP, поэтому браузер блокирует идентификацию устройства. Используйте HTTPS (Tailscale Serve) или откройте
+        <span class="mono">http://127.0.0.1:18789</span> на хосте шлюза.
         <div style="margin-top: 6px">
-          If you must stay on HTTP, set
-          <span class="mono">gateway.controlUi.allowInsecureAuth: true</span> (token-only).
+          Если необходимо остаться на HTTP, установите
+          <span class="mono">gateway.controlUi.allowInsecureAuth: true</span> (только токен).
         </div>
         <div style="margin-top: 6px">
           <a
@@ -122,8 +122,8 @@ export function renderOverview(props: OverviewProps) {
   return html`
     <section class="grid grid-cols-2">
       <div class="card">
-        <div class="card-title">Gateway Access</div>
-        <div class="card-sub">Where the dashboard connects and how it authenticates.</div>
+        <div class="card-title">Доступ к шлюзу</div>
+        <div class="card-sub">Подключение панели управления и аутентификация.</div>
         <div class="form-grid" style="margin-top: 16px;">
           <label class="field">
             <span>WebSocket URL</span>
@@ -137,7 +137,7 @@ export function renderOverview(props: OverviewProps) {
             />
           </label>
           <label class="field">
-            <span>Gateway Token</span>
+            <span>Токен шлюза</span>
             <input
               .value=${props.settings.token}
               @input=${(e: Event) => {
@@ -148,7 +148,7 @@ export function renderOverview(props: OverviewProps) {
             />
           </label>
           <label class="field">
-            <span>Password (not stored)</span>
+            <span>Пароль (не сохраняется)</span>
             <input
               type="password"
               .value=${props.password}
@@ -160,7 +160,7 @@ export function renderOverview(props: OverviewProps) {
             />
           </label>
           <label class="field">
-            <span>Default Session Key</span>
+            <span>Ключ сессии по умолчанию</span>
             <input
               .value=${props.settings.sessionKey}
               @input=${(e: Event) => {
@@ -171,32 +171,32 @@ export function renderOverview(props: OverviewProps) {
           </label>
         </div>
         <div class="row" style="margin-top: 14px;">
-          <button class="btn" @click=${() => props.onConnect()}>Connect</button>
-          <button class="btn" @click=${() => props.onRefresh()}>Refresh</button>
-          <span class="muted">Click Connect to apply connection changes.</span>
+          <button class="btn" @click=${() => props.onConnect()}>Подключить</button>
+          <button class="btn" @click=${() => props.onRefresh()}>Обновить</button>
+          <span class="muted">Нажмите Подключить для применения изменений.</span>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">Snapshot</div>
-        <div class="card-sub">Latest gateway handshake information.</div>
+        <div class="card-title">Снимок состояния</div>
+        <div class="card-sub">Информация о последнем рукопожатии шлюза.</div>
         <div class="stat-grid" style="margin-top: 16px;">
           <div class="stat">
-            <div class="stat-label">Status</div>
+            <div class="stat-label">Статус</div>
             <div class="stat-value ${props.connected ? "ok" : "warn"}">
-              ${props.connected ? "Connected" : "Disconnected"}
+              ${props.connected ? "Подключено" : "Отключено"}
             </div>
           </div>
           <div class="stat">
-            <div class="stat-label">Uptime</div>
+            <div class="stat-label">Время работы</div>
             <div class="stat-value">${uptime}</div>
           </div>
           <div class="stat">
-            <div class="stat-label">Tick Interval</div>
+            <div class="stat-label">Интервал тиков</div>
             <div class="stat-value">${tick}</div>
           </div>
           <div class="stat">
-            <div class="stat-label">Last Channels Refresh</div>
+            <div class="stat-label">Последнее обновление каналов</div>
             <div class="stat-value">
               ${props.lastChannelsRefresh ? formatAgo(props.lastChannelsRefresh) : "n/a"}
             </div>
@@ -211,7 +211,7 @@ export function renderOverview(props: OverviewProps) {
             </div>`
             : html`
                 <div class="callout" style="margin-top: 14px">
-                  Use Channels to link WhatsApp, Telegram, Discord, Signal, or iMessage.
+                  Используйте Каналы для подключения WhatsApp, Telegram, Discord, Signal или iMessage.
                 </div>
               `
         }
@@ -220,41 +220,41 @@ export function renderOverview(props: OverviewProps) {
 
     <section class="grid grid-cols-3" style="margin-top: 18px;">
       <div class="card stat-card">
-        <div class="stat-label">Instances</div>
+        <div class="stat-label">Подключения</div>
         <div class="stat-value">${props.presenceCount}</div>
-        <div class="muted">Presence beacons in the last 5 minutes.</div>
+        <div class="muted">Сигналы присутствия за последние 5 минут.</div>
       </div>
       <div class="card stat-card">
-        <div class="stat-label">Sessions</div>
+        <div class="stat-label">Сессии</div>
         <div class="stat-value">${props.sessionsCount ?? "n/a"}</div>
-        <div class="muted">Recent session keys tracked by the gateway.</div>
+        <div class="muted">Ключи недавних сессий, отслеживаемых шлюзом.</div>
       </div>
       <div class="card stat-card">
-        <div class="stat-label">Cron</div>
+        <div class="stat-label">Планировщик</div>
         <div class="stat-value">
-          ${props.cronEnabled == null ? "n/a" : props.cronEnabled ? "Enabled" : "Disabled"}
+          ${props.cronEnabled == null ? "n/a" : props.cronEnabled ? "Включено" : "Отключено"}
         </div>
-        <div class="muted">Next wake ${formatNextRun(props.cronNext)}</div>
+        <div class="muted">Следующий запуск ${formatNextRun(props.cronNext)}</div>
       </div>
     </section>
 
     <section class="card" style="margin-top: 18px;">
-      <div class="card-title">Notes</div>
-      <div class="card-sub">Quick reminders for remote control setups.</div>
+      <div class="card-title">Заметки</div>
+      <div class="card-sub">Краткие напоминания по удалённому управлению.</div>
       <div class="note-grid" style="margin-top: 14px;">
         <div>
-          <div class="note-title">Tailscale serve</div>
+          <div class="note-title">Tailscale Serve</div>
           <div class="muted">
-            Prefer serve mode to keep the gateway on loopback with tailnet auth.
+            Используйте режим serve для работы шлюза на loopback с авторизацией tailnet.
           </div>
         </div>
         <div>
-          <div class="note-title">Session hygiene</div>
-          <div class="muted">Use /new or sessions.patch to reset context.</div>
+          <div class="note-title">Гигиена сессий</div>
+          <div class="muted">Используйте /new или sessions.patch для сброса контекста.</div>
         </div>
         <div>
-          <div class="note-title">Cron reminders</div>
-          <div class="muted">Use isolated sessions for recurring runs.</div>
+          <div class="note-title">Напоминания планировщика</div>
+          <div class="muted">Используйте изолированные сессии для периодических запусков.</div>
         </div>
       </div>
     </section>

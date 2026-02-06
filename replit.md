@@ -61,6 +61,12 @@ node openclaw.mjs gateway --port 5000 --bind lan --allow-unconfigured --verbose
 
 ## Recent Changes
 
+- 2026-02-06: Complete Control UI russification
+  - Translated all user-facing strings in ~60+ UI files from English to Russian
+  - Covers: navigation, chat, overview, channels (WhatsApp/Telegram/Discord/Slack/Signal/iMessage/Google Chat/Nostr), sessions, agents, skills, nodes, config, usage, cron, logs, debug, exec-approval, settings, format/presenter utilities
+  - Only user-visible text translated; code identifiers, CSS classes, HTML attributes, config keys preserved
+  - Both main project and UI rebuilt successfully
+
 - 2026-02-06: Initial Replit setup
   - Configured Node.js 22, pnpm
   - Updated packageManager field to match installed pnpm version
@@ -72,4 +78,4 @@ node openclaw.mjs gateway --port 5000 --bind lan --allow-unconfigured --verbose
 
 ## User Preferences
 
-- No specific preferences recorded yet
+- UI language: Russian

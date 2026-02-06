@@ -1,13 +1,13 @@
 import type { IconName } from "./icons.js";
 
 export const TAB_GROUPS = [
-  { label: "Chat", tabs: ["chat"] },
+  { label: "Чат", tabs: ["chat"] },
   {
-    label: "Control",
+    label: "Управление",
     tabs: ["overview", "channels", "instances", "sessions", "usage", "cron"],
   },
-  { label: "Agent", tabs: ["agents", "skills", "nodes"] },
-  { label: "Settings", tabs: ["config", "debug", "logs"] },
+  { label: "Агент", tabs: ["agents", "skills", "nodes"] },
+  { label: "Настройки", tabs: ["config", "debug", "logs"] },
 ] as const;
 
 export type Tab =
@@ -158,64 +158,64 @@ export function iconForTab(tab: Tab): IconName {
 export function titleForTab(tab: Tab) {
   switch (tab) {
     case "agents":
-      return "Agents";
+      return "Агенты";
     case "overview":
-      return "Overview";
+      return "Обзор";
     case "channels":
-      return "Channels";
+      return "Каналы";
     case "instances":
-      return "Instances";
+      return "Подключения";
     case "sessions":
-      return "Sessions";
+      return "Сессии";
     case "usage":
-      return "Usage";
+      return "Использование";
     case "cron":
-      return "Cron Jobs";
+      return "Планировщик";
     case "skills":
-      return "Skills";
+      return "Навыки";
     case "nodes":
-      return "Nodes";
+      return "Узлы";
     case "chat":
-      return "Chat";
+      return "Чат";
     case "config":
-      return "Config";
+      return "Конфигурация";
     case "debug":
-      return "Debug";
+      return "Отладка";
     case "logs":
-      return "Logs";
+      return "Логи";
     default:
-      return "Control";
+      return "Управление";
   }
 }
 
 export function subtitleForTab(tab: Tab) {
   switch (tab) {
     case "agents":
-      return "Manage agent workspaces, tools, and identities.";
+      return "Управление рабочими пространствами, инструментами и идентификацией агентов.";
     case "overview":
-      return "Gateway status, entry points, and a fast health read.";
+      return "Статус шлюза, точки входа и быстрая проверка состояния.";
     case "channels":
-      return "Manage channels and settings.";
+      return "Управление каналами и настройками.";
     case "instances":
-      return "Presence beacons from connected clients and nodes.";
+      return "Сигналы присутствия от подключённых клиентов и узлов.";
     case "sessions":
-      return "Inspect active sessions and adjust per-session defaults.";
+      return "Просмотр активных сессий и настройка параметров.";
     case "usage":
       return "";
     case "cron":
-      return "Schedule wakeups and recurring agent runs.";
+      return "Планирование пробуждений и регулярных запусков агента.";
     case "skills":
-      return "Manage skill availability and API key injection.";
+      return "Управление доступностью навыков и внедрением API-ключей.";
     case "nodes":
-      return "Paired devices, capabilities, and command exposure.";
+      return "Сопряжённые устройства, возможности и доступные команды.";
     case "chat":
-      return "Direct gateway chat session for quick interventions.";
+      return "Прямой чат со шлюзом для быстрого взаимодействия.";
     case "config":
-      return "Edit ~/.openclaw/openclaw.json safely.";
+      return "Безопасное редактирование ~/.openclaw/openclaw.json.";
     case "debug":
-      return "Gateway snapshots, events, and manual RPC calls.";
+      return "Снимки шлюза, события и ручные RPC-вызовы.";
     case "logs":
-      return "Live tail of the gateway file logs.";
+      return "Просмотр логов шлюза в реальном времени.";
     default:
       return "";
   }

@@ -14,25 +14,25 @@ export function renderIMessageCard(params: {
   return html`
     <div class="card">
       <div class="card-title">iMessage</div>
-      <div class="card-sub">macOS bridge status and channel configuration.</div>
+      <div class="card-sub">Статус моста macOS и конфигурация канала.</div>
       ${accountCountLabel}
 
       <div class="status-list" style="margin-top: 16px;">
         <div>
-          <span class="label">Configured</span>
-          <span>${imessage?.configured ? "Yes" : "No"}</span>
+          <span class="label">Настроен</span>
+          <span>${imessage?.configured ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Running</span>
-          <span>${imessage?.running ? "Yes" : "No"}</span>
+          <span class="label">Запущен</span>
+          <span>${imessage?.running ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Last start</span>
-          <span>${imessage?.lastStartAt ? formatAgo(imessage.lastStartAt) : "n/a"}</span>
+          <span class="label">Последний запуск</span>
+          <span>${imessage?.lastStartAt ? formatAgo(imessage.lastStartAt) : "н/д"}</span>
         </div>
         <div>
-          <span class="label">Last probe</span>
-          <span>${imessage?.lastProbeAt ? formatAgo(imessage.lastProbeAt) : "n/a"}</span>
+          <span class="label">Последняя проверка</span>
+          <span>${imessage?.lastProbeAt ? formatAgo(imessage.lastProbeAt) : "н/д"}</span>
         </div>
       </div>
 
@@ -47,7 +47,7 @@ export function renderIMessageCard(params: {
       ${
         imessage?.probe
           ? html`<div class="callout" style="margin-top: 12px;">
-            Probe ${imessage.probe.ok ? "ok" : "failed"} ·
+            Проверка ${imessage.probe.ok ? "ок" : "не пройдена"} ·
             ${imessage.probe.error ?? ""}
           </div>`
           : nothing
@@ -57,7 +57,7 @@ export function renderIMessageCard(params: {
 
       <div class="row" style="margin-top: 12px;">
         <button class="btn" @click=${() => props.onRefresh(true)}>
-          Probe
+          Проверить
         </button>
       </div>
     </div>

@@ -2,60 +2,60 @@ import { stripReasoningTagsFromText } from "../../../src/shared/text/reasoning-t
 
 export function formatMs(ms?: number | null): string {
   if (!ms && ms !== 0) {
-    return "n/a";
+    return "н/д";
   }
   return new Date(ms).toLocaleString();
 }
 
 export function formatAgo(ms?: number | null): string {
   if (!ms && ms !== 0) {
-    return "n/a";
+    return "н/д";
   }
   const diff = Date.now() - ms;
   const absDiff = Math.abs(diff);
-  const suffix = diff < 0 ? "from now" : "ago";
+  const suffix = diff < 0 ? "через" : "назад";
   const sec = Math.round(absDiff / 1000);
   if (sec < 60) {
-    return diff < 0 ? "just now" : `${sec}s ago`;
+    return diff < 0 ? "только что" : `${sec}с назад`;
   }
   const min = Math.round(sec / 60);
   if (min < 60) {
-    return `${min}m ${suffix}`;
+    return diff < 0 ? `через ${min}м` : `${min}м назад`;
   }
   const hr = Math.round(min / 60);
   if (hr < 48) {
-    return `${hr}h ${suffix}`;
+    return diff < 0 ? `через ${hr}ч` : `${hr}ч назад`;
   }
   const day = Math.round(hr / 24);
-  return `${day}d ${suffix}`;
+  return diff < 0 ? `через ${day}д` : `${day}д назад`;
 }
 
 export function formatDurationMs(ms?: number | null): string {
   if (!ms && ms !== 0) {
-    return "n/a";
+    return "н/д";
   }
   if (ms < 1000) {
-    return `${ms}ms`;
+    return `${ms}мс`;
   }
   const sec = Math.round(ms / 1000);
   if (sec < 60) {
-    return `${sec}s`;
+    return `${sec}с`;
   }
   const min = Math.round(sec / 60);
   if (min < 60) {
-    return `${min}m`;
+    return `${min}м`;
   }
   const hr = Math.round(min / 60);
   if (hr < 48) {
-    return `${hr}h`;
+    return `${hr}ч`;
   }
   const day = Math.round(hr / 24);
-  return `${day}d`;
+  return `${day}д`;
 }
 
 export function formatList(values?: Array<string | null | undefined>): string {
   if (!values || values.length === 0) {
-    return "none";
+    return "нет";
   }
   return values.filter((v): v is string => Boolean(v && v.trim())).join(", ");
 }

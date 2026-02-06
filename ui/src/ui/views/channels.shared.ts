@@ -4,18 +4,18 @@ import type { ChannelKey, ChannelsProps } from "./channels.types.ts";
 
 export function formatDuration(ms?: number | null) {
   if (!ms && ms !== 0) {
-    return "n/a";
+    return "н/д";
   }
   const sec = Math.round(ms / 1000);
   if (sec < 60) {
-    return `${sec}s`;
+    return `${sec}с`;
   }
   const min = Math.round(sec / 60);
   if (min < 60) {
-    return `${min}m`;
+    return `${min}м`;
   }
   const hr = Math.round(min / 60);
-  return `${hr}h`;
+  return `${hr}ч`;
 }
 
 export function channelEnabled(key: ChannelKey, props: ChannelsProps) {
@@ -50,5 +50,5 @@ export function renderChannelAccountCount(
   if (count < 2) {
     return nothing;
   }
-  return html`<div class="account-count">Accounts (${count})</div>`;
+  return html`<div class="account-count">Аккаунты (${count})</div>`;
 }

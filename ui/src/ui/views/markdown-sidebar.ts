@@ -14,8 +14,8 @@ export function renderMarkdownSidebar(props: MarkdownSidebarProps) {
   return html`
     <div class="sidebar-panel">
       <div class="sidebar-header">
-        <div class="sidebar-title">Tool Output</div>
-        <button @click=${props.onClose} class="btn" title="Close sidebar">
+        <div class="sidebar-title">Результат инструмента</div>
+        <button @click=${props.onClose} class="btn" title="Закрыть боковую панель">
           ${icons.x}
         </button>
       </div>
@@ -25,13 +25,13 @@ export function renderMarkdownSidebar(props: MarkdownSidebarProps) {
             ? html`
               <div class="callout danger">${props.error}</div>
               <button @click=${props.onViewRawText} class="btn" style="margin-top: 12px;">
-                View Raw Text
+                Показать исходный текст
               </button>
             `
             : props.content
               ? html`<div class="sidebar-markdown">${unsafeHTML(toSanitizedMarkdownHtml(props.content))}</div>`
               : html`
-                  <div class="muted">No content available</div>
+                  <div class="muted">Содержимое отсутствует</div>
                 `
         }
       </div>

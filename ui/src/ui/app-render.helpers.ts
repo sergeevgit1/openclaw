@@ -130,7 +130,7 @@ export function renderChatControls(state: AppViewState) {
           (state as unknown as OpenClawApp).resetToolStream();
           void refreshChat(state as unknown as Parameters<typeof refreshChat>[0]);
         }}
-        title="Refresh chat data"
+        title="Обновить данные чата"
       >
         ${refreshIcon}
       </button>
@@ -150,8 +150,8 @@ export function renderChatControls(state: AppViewState) {
         aria-pressed=${showThinking}
         title=${
           disableThinkingToggle
-            ? "Disabled during onboarding"
-            : "Toggle assistant thinking/working output"
+            ? "Отключено во время обучения"
+            : "Показать/скрыть размышления ассистента"
         }
       >
         ${icons.brain}
@@ -171,8 +171,8 @@ export function renderChatControls(state: AppViewState) {
         aria-pressed=${focusActive}
         title=${
           disableFocusToggle
-            ? "Disabled during onboarding"
-            : "Toggle focus mode (hide sidebar + page header)"
+            ? "Отключено во время обучения"
+            : "Режим фокуса (скрыть боковую панель и заголовок)"
         }
       >
         ${focusIcon}
@@ -278,14 +278,14 @@ export function renderThemeToggle(state: AppViewState) {
 
   return html`
     <div class="theme-toggle" style="--theme-index: ${index};">
-      <div class="theme-toggle__track" role="group" aria-label="Theme">
+      <div class="theme-toggle__track" role="group" aria-label="Тема">
         <span class="theme-toggle__indicator"></span>
         <button
           class="theme-toggle__button ${state.theme === "system" ? "active" : ""}"
           @click=${applyTheme("system")}
           aria-pressed=${state.theme === "system"}
-          aria-label="System theme"
-          title="System"
+          aria-label="Системная тема"
+          title="Системная"
         >
           ${renderMonitorIcon()}
         </button>
@@ -293,8 +293,8 @@ export function renderThemeToggle(state: AppViewState) {
           class="theme-toggle__button ${state.theme === "light" ? "active" : ""}"
           @click=${applyTheme("light")}
           aria-pressed=${state.theme === "light"}
-          aria-label="Light theme"
-          title="Light"
+          aria-label="Светлая тема"
+          title="Светлая"
         >
           ${renderSunIcon()}
         </button>
@@ -302,8 +302,8 @@ export function renderThemeToggle(state: AppViewState) {
           class="theme-toggle__button ${state.theme === "dark" ? "active" : ""}"
           @click=${applyTheme("dark")}
           aria-pressed=${state.theme === "dark"}
-          aria-label="Dark theme"
-          title="Dark"
+          aria-label="Тёмная тема"
+          title="Тёмная"
         >
           ${renderMoonIcon()}
         </button>

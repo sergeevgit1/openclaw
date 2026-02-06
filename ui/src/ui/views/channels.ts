@@ -70,10 +70,10 @@ export function renderChannels(props: ChannelsProps) {
     <section class="card" style="margin-top: 18px;">
       <div class="row" style="justify-content: space-between;">
         <div>
-          <div class="card-title">Channel health</div>
-          <div class="card-sub">Channel status snapshots from the gateway.</div>
+          <div class="card-title">Состояние каналов</div>
+          <div class="card-sub">Снимки состояния каналов со шлюза.</div>
         </div>
-        <div class="muted">${props.lastSuccessAt ? formatAgo(props.lastSuccessAt) : "n/a"}</div>
+        <div class="muted">${props.lastSuccessAt ? formatAgo(props.lastSuccessAt) : "н/д"}</div>
       </div>
       ${
         props.lastError
@@ -83,7 +83,7 @@ export function renderChannels(props: ChannelsProps) {
           : nothing
       }
       <pre class="code-block" style="margin-top: 12px;">
-${props.snapshot ? JSON.stringify(props.snapshot, null, 2) : "No snapshot yet."}
+${props.snapshot ? JSON.stringify(props.snapshot, null, 2) : "Снимок ещё не получен."}
       </pre>
     </section>
   `;
@@ -194,7 +194,7 @@ function renderGenericChannelCard(
   return html`
     <div class="card">
       <div class="card-title">${label}</div>
-      <div class="card-sub">Channel status and configuration.</div>
+      <div class="card-sub">Статус канала и конфигурация.</div>
       ${accountCountLabel}
 
       ${
@@ -207,16 +207,16 @@ function renderGenericChannelCard(
           : html`
             <div class="status-list" style="margin-top: 16px;">
               <div>
-                <span class="label">Configured</span>
-                <span>${configured == null ? "n/a" : configured ? "Yes" : "No"}</span>
+                <span class="label">Настроен</span>
+                <span>${configured == null ? "н/д" : configured ? "Да" : "Нет"}</span>
               </div>
               <div>
-                <span class="label">Running</span>
-                <span>${running == null ? "n/a" : running ? "Yes" : "No"}</span>
+                <span class="label">Запущен</span>
+                <span>${running == null ? "н/д" : running ? "Да" : "Нет"}</span>
               </div>
               <div>
-                <span class="label">Connected</span>
-                <span>${connected == null ? "n/a" : connected ? "Yes" : "No"}</span>
+                <span class="label">Подключён</span>
+                <span>${connected == null ? "н/д" : connected ? "Да" : "Нет"}</span>
               </div>
             </div>
           `
@@ -258,29 +258,27 @@ function hasRecentActivity(account: ChannelAccountSnapshot): boolean {
   return Date.now() - account.lastInboundAt < RECENT_ACTIVITY_THRESHOLD_MS;
 }
 
-function deriveRunningStatus(account: ChannelAccountSnapshot): "Yes" | "No" | "Active" {
+function deriveRunningStatus(account: ChannelAccountSnapshot): "Да" | "Нет" | "Активен" {
   if (account.running) {
-    return "Yes";
+    return "Да";
   }
-  // If we have recent inbound activity, the channel is effectively running
   if (hasRecentActivity(account)) {
-    return "Active";
+    return "Активен";
   }
-  return "No";
+  return "Нет";
 }
 
-function deriveConnectedStatus(account: ChannelAccountSnapshot): "Yes" | "No" | "Active" | "n/a" {
+function deriveConnectedStatus(account: ChannelAccountSnapshot): "Да" | "Нет" | "Активен" | "н/д" {
   if (account.connected === true) {
-    return "Yes";
+    return "Да";
   }
   if (account.connected === false) {
-    return "No";
+    return "Нет";
   }
-  // If connected is null/undefined but we have recent activity, show as active
   if (hasRecentActivity(account)) {
-    return "Active";
+    return "Активен";
   }
-  return "n/a";
+  return "н/д";
 }
 
 function renderGenericAccount(account: ChannelAccountSnapshot) {
@@ -295,20 +293,20 @@ function renderGenericAccount(account: ChannelAccountSnapshot) {
       </div>
       <div class="status-list account-card-status">
         <div>
-          <span class="label">Running</span>
+          <span class="label">Запущен</span>
           <span>${runningStatus}</span>
         </div>
         <div>
-          <span class="label">Configured</span>
-          <span>${account.configured ? "Yes" : "No"}</span>
+          <span class="label">Настроен</span>
+          <span>${account.configured ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Connected</span>
+          <span class="label">Подключён</span>
           <span>${connectedStatus}</span>
         </div>
         <div>
-          <span class="label">Last inbound</span>
-          <span>${account.lastInboundAt ? formatAgo(account.lastInboundAt) : "n/a"}</span>
+          <span class="label">Последнее входящее</span>
+          <span>${account.lastInboundAt ? formatAgo(account.lastInboundAt) : "н/д"}</span>
         </div>
         ${
           account.lastError

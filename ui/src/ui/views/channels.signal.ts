@@ -14,29 +14,29 @@ export function renderSignalCard(params: {
   return html`
     <div class="card">
       <div class="card-title">Signal</div>
-      <div class="card-sub">signal-cli status and channel configuration.</div>
+      <div class="card-sub">Статус signal-cli и конфигурация канала.</div>
       ${accountCountLabel}
 
       <div class="status-list" style="margin-top: 16px;">
         <div>
-          <span class="label">Configured</span>
-          <span>${signal?.configured ? "Yes" : "No"}</span>
+          <span class="label">Настроен</span>
+          <span>${signal?.configured ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Running</span>
-          <span>${signal?.running ? "Yes" : "No"}</span>
+          <span class="label">Запущен</span>
+          <span>${signal?.running ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Base URL</span>
-          <span>${signal?.baseUrl ?? "n/a"}</span>
+          <span class="label">Базовый URL</span>
+          <span>${signal?.baseUrl ?? "н/д"}</span>
         </div>
         <div>
-          <span class="label">Last start</span>
-          <span>${signal?.lastStartAt ? formatAgo(signal.lastStartAt) : "n/a"}</span>
+          <span class="label">Последний запуск</span>
+          <span>${signal?.lastStartAt ? formatAgo(signal.lastStartAt) : "н/д"}</span>
         </div>
         <div>
-          <span class="label">Last probe</span>
-          <span>${signal?.lastProbeAt ? formatAgo(signal.lastProbeAt) : "n/a"}</span>
+          <span class="label">Последняя проверка</span>
+          <span>${signal?.lastProbeAt ? formatAgo(signal.lastProbeAt) : "н/д"}</span>
         </div>
       </div>
 
@@ -51,7 +51,7 @@ export function renderSignalCard(params: {
       ${
         signal?.probe
           ? html`<div class="callout" style="margin-top: 12px;">
-            Probe ${signal.probe.ok ? "ok" : "failed"} ·
+            Проверка ${signal.probe.ok ? "ок" : "не пройдена"} ·
             ${signal.probe.status ?? ""} ${signal.probe.error ?? ""}
           </div>`
           : nothing
@@ -61,7 +61,7 @@ export function renderSignalCard(params: {
 
       <div class="row" style="margin-top: 12px;">
         <button class="btn" @click=${() => props.onRefresh(true)}>
-          Probe
+          Проверить
         </button>
       </div>
     </div>

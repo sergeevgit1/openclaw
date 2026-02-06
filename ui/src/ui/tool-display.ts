@@ -40,7 +40,7 @@ function normalizeToolName(name?: string): string {
 function defaultTitle(name: string): string {
   const cleaned = name.replace(/_/g, " ").trim();
   if (!cleaned) {
-    return "Tool";
+    return "Инструмент";
   }
   return cleaned
     .split(/\s+/)

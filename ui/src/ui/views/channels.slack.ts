@@ -14,25 +14,25 @@ export function renderSlackCard(params: {
   return html`
     <div class="card">
       <div class="card-title">Slack</div>
-      <div class="card-sub">Socket mode status and channel configuration.</div>
+      <div class="card-sub">Статус Socket-режима и конфигурация канала.</div>
       ${accountCountLabel}
 
       <div class="status-list" style="margin-top: 16px;">
         <div>
-          <span class="label">Configured</span>
-          <span>${slack?.configured ? "Yes" : "No"}</span>
+          <span class="label">Настроен</span>
+          <span>${slack?.configured ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Running</span>
-          <span>${slack?.running ? "Yes" : "No"}</span>
+          <span class="label">Запущен</span>
+          <span>${slack?.running ? "Да" : "Нет"}</span>
         </div>
         <div>
-          <span class="label">Last start</span>
-          <span>${slack?.lastStartAt ? formatAgo(slack.lastStartAt) : "n/a"}</span>
+          <span class="label">Последний запуск</span>
+          <span>${slack?.lastStartAt ? formatAgo(slack.lastStartAt) : "н/д"}</span>
         </div>
         <div>
-          <span class="label">Last probe</span>
-          <span>${slack?.lastProbeAt ? formatAgo(slack.lastProbeAt) : "n/a"}</span>
+          <span class="label">Последняя проверка</span>
+          <span>${slack?.lastProbeAt ? formatAgo(slack.lastProbeAt) : "н/д"}</span>
         </div>
       </div>
 
@@ -47,7 +47,7 @@ export function renderSlackCard(params: {
       ${
         slack?.probe
           ? html`<div class="callout" style="margin-top: 12px;">
-            Probe ${slack.probe.ok ? "ok" : "failed"} ·
+            Проверка ${slack.probe.ok ? "ок" : "не пройдена"} ·
             ${slack.probe.status ?? ""} ${slack.probe.error ?? ""}
           </div>`
           : nothing
@@ -57,7 +57,7 @@ export function renderSlackCard(params: {
 
       <div class="row" style="margin-top: 12px;">
         <button class="btn" @click=${() => props.onRefresh(true)}>
-          Probe
+          Проверить
         </button>
       </div>
     </div>
