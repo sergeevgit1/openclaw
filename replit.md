@@ -38,8 +38,8 @@ node openclaw.mjs gateway --port 5000 --bind lan --allow-unconfigured --verbose
 
 ## Environment Variables
 
-- `OPENCLAW_GATEWAY_TOKEN` - Auth token required for non-loopback connections (paste this into Control UI Settings to authenticate the WebSocket)
-- `OPENCLAW_ALLOW_IFRAME` - Set to "1" to allow embedding in iframes (needed for Replit preview)
+- `OPENCLAW_GATEWAY_TOKEN` - Auth token for non-loopback connections (auto-injected into Control UI when `OPENCLAW_ALLOW_IFRAME=1`)
+- `OPENCLAW_ALLOW_IFRAME` - Set to "1" to allow embedding in iframes (needed for Replit preview) and enable automatic token injection into Control UI
 
 ## Build Steps
 
@@ -47,12 +47,26 @@ node openclaw.mjs gateway --port 5000 --bind lan --allow-unconfigured --verbose
 2. `pnpm build` - Build TypeScript source
 3. `cd ui && pnpm build` - Build Control UI
 
+## Replit-Specific Modifications
+
+### Token Auto-Injection
+- `src/gateway/control-ui.ts`: When `OPENCLAW_ALLOW_IFRAME=1`, injects `window.__OPENCLAW_INJECTED_TOKEN__` into the Control UI HTML with the gateway token value
+- `ui/src/ui/storage.ts`: `loadSettings()` reads the injected token as the default, so users don't need to manually paste it in Settings
+
+### Iframe Compatibility
+- `src/gateway/control-ui.ts`: Conditionally skips X-Frame-Options and CSP frame-ancestors headers when `OPENCLAW_ALLOW_IFRAME=1`
+
+### Gateway Config
+- `~/.openclaw/openclaw.json`: Sets `gateway.controlUi.dangerouslyDisableDeviceAuth: true` so that connections through Replit's proxy (which appear as non-local) can authenticate with just the token, bypassing device pairing requirements
+
 ## Recent Changes
 
 - 2026-02-06: Initial Replit setup
   - Configured Node.js 22, pnpm
   - Updated packageManager field to match installed pnpm version
-  - Modified `src/gateway/control-ui.ts` to conditionally skip X-Frame-Options/CSP headers when `OPENCLAW_ALLOW_IFRAME=1` (for Replit iframe compatibility)
+  - Modified `src/gateway/control-ui.ts` for iframe compatibility and token auto-injection
+  - Modified `ui/src/ui/storage.ts` to read injected token as default
+  - Created `~/.openclaw/openclaw.json` with `dangerouslyDisableDeviceAuth: true` for Replit proxy compatibility
   - Set up gateway workflow on port 5000 with LAN binding
   - Configured deployment as VM target
 

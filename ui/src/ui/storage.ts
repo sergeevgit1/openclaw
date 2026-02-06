@@ -21,9 +21,13 @@ export function loadSettings(): UiSettings {
     return `${proto}://${location.host}`;
   })();
 
+  const injectedToken = typeof (window as Record<string, unknown>).__OPENCLAW_INJECTED_TOKEN__ === "string"
+    ? (window as Record<string, unknown>).__OPENCLAW_INJECTED_TOKEN__ as string
+    : "";
+
   const defaults: UiSettings = {
     gatewayUrl: defaultUrl,
-    token: "",
+    token: injectedToken,
     sessionKey: "main",
     lastActiveSessionKey: "main",
     theme: "system",
@@ -45,7 +49,7 @@ export function loadSettings(): UiSettings {
         typeof parsed.gatewayUrl === "string" && parsed.gatewayUrl.trim()
           ? parsed.gatewayUrl.trim()
           : defaults.gatewayUrl,
-      token: typeof parsed.token === "string" ? parsed.token : defaults.token,
+      token: typeof parsed.token === "string" && parsed.token.trim() ? parsed.token : defaults.token,
       sessionKey:
         typeof parsed.sessionKey === "string" && parsed.sessionKey.trim()
           ? parsed.sessionKey.trim()

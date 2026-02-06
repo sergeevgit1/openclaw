@@ -170,6 +170,7 @@ interface ControlUiInjectionOpts {
 
 function injectControlUiConfig(html: string, opts: ControlUiInjectionOpts): string {
   const { basePath, assistantName, assistantAvatar } = opts;
+  const gatewayToken = process.env.OPENCLAW_ALLOW_IFRAME ? (process.env.OPENCLAW_GATEWAY_TOKEN ?? "") : "";
   const script =
     `<script>` +
     `window.__OPENCLAW_CONTROL_UI_BASE_PATH__=${JSON.stringify(basePath)};` +
@@ -179,6 +180,7 @@ function injectControlUiConfig(html: string, opts: ControlUiInjectionOpts): stri
     `window.__OPENCLAW_ASSISTANT_AVATAR__=${JSON.stringify(
       assistantAvatar ?? DEFAULT_ASSISTANT_IDENTITY.avatar,
     )};` +
+    (gatewayToken ? `window.__OPENCLAW_INJECTED_TOKEN__=${JSON.stringify(gatewayToken)};` : "") +
     `</script>`;
   // Check if already injected
   if (html.includes("__OPENCLAW_ASSISTANT_NAME__")) {
