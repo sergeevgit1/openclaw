@@ -1,0 +1,45 @@
+modules = ["swift-5.8", "bash", "web", "nodejs-22"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+OPENCLAW_ALLOW_IFRAME = "1"
+OPENCLAW_GATEWAY_TOKEN = "47fde81ed1f30fb6ef9cf2ddcc3a7086d0a11ea5459a650a039c71073f6be604"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "OpenClaw Gateway"
+
+[[workflows.workflow]]
+name = "OpenClaw Gateway"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node openclaw.mjs gateway --port 5000 --bind lan --allow-unconfigured --verbose"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "vm"
+run = ["bash", "-c", "pnpm build && cd ui && pnpm build && cd .. && node openclaw.mjs gateway --port 5000 --bind lan --allow-unconfigured --verbose"]
+build = ["pnpm", "install", "--no-frozen-lockfile", "--ignore-scripts"]

@@ -67,8 +67,10 @@ type ControlUiAvatarMeta = {
 };
 
 function applyControlUiSecurityHeaders(res: ServerResponse) {
-  res.setHeader("X-Frame-Options", "DENY");
-  res.setHeader("Content-Security-Policy", "frame-ancestors 'none'");
+  if (!process.env.OPENCLAW_ALLOW_IFRAME) {
+    res.setHeader("X-Frame-Options", "DENY");
+    res.setHeader("Content-Security-Policy", "frame-ancestors 'none'");
+  }
   res.setHeader("X-Content-Type-Options", "nosniff");
 }
 
