@@ -211,7 +211,7 @@ export function subtitleForTab(tab: Tab) {
     case "chat":
       return "Прямой чат со шлюзом для быстрого взаимодействия.";
     case "config":
-      return "Безопасное редактирование ~/.openclaw/openclaw.json.";
+      return "Правка ~/.openclaw/openclaw.json.";
     case "debug":
       return "Снимки шлюза, события и ручные RPC-вызовы.";
     case "logs":
