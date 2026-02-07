@@ -1323,18 +1323,10 @@
   text-align: right;
 }
 
-/* Chat compose - DEFINITIVELY REMOVED */
-.chat-compose { display: none !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; overflow: hidden !important; }
-.chat-compose__field, .chat-compose__actions { display: none !important; }
-
 
 @media (max-width: 900px) {
   .chat-session {
     min-width: 180px;
-  }
-
-  .chat-compose {
-    grid-template-columns: 1fr;
   }
 }
 
