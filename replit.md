@@ -61,6 +61,13 @@ node openclaw.mjs gateway --port 5000 --bind lan --allow-unconfigured --verbose
 
 ## Recent Changes
 
+- 2026-02-07: Token optimization config
+  - Context Pruning: `cache-ttl` mode with 10min TTL, soft trim to 2000 chars, hard clear for old tool results
+  - Compaction: `safeguard` mode with `maxHistoryShare: 0.6`, `reserveTokensFloor: 8000`
+  - Context window capped at 128K tokens (vs default 200K)
+  - Group chat history limited to 50 messages
+  - Config location: `~/.openclaw/openclaw.json` under `agents.defaults` and `messages`
+
 - 2026-02-07: Chat history panel
   - Toggleable left sidebar showing past chat sessions sorted by last activity
   - Each entry shows session name/label and relative timestamp (formatAgo)
