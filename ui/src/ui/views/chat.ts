@@ -307,9 +307,14 @@ export function renderChat(props: ChatProps) {
 
   return html`
     <section class="card chat">
-      ${props.disabledReason ? html`<div class="callout">${props.disabledReason}</div>` : nothing}
-
-      ${props.error ? html`<div class="callout danger">${props.error}</div>` : nothing}
+      ${(props.disabledReason || props.error)
+        ? html`
+          <div class="chat-toast-container">
+            ${props.disabledReason ? html`<div class="chat-toast chat-toast--warn"><span>${props.disabledReason}</span></div>` : nothing}
+            ${props.error ? html`<div class="chat-toast chat-toast--danger"><span>${props.error}</span></div>` : nothing}
+          </div>
+        `
+        : nothing}
 
       ${renderCompactionIndicator(props.compactionStatus)}
 
