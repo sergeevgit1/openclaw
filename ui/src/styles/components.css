@@ -1323,64 +1323,11 @@
   text-align: right;
 }
 
-/* Chat compose */
+/* Chat compose - redundant, using chat/layout.css */
 .chat-compose {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: none;
 }
 
-.shell--chat .chat-compose {
-  position: sticky;
-  bottom: 0;
-  z-index: 5;
-  margin-top: 0;
-  padding-top: 12px;
-  background: linear-gradient(180deg, transparent 0%, var(--bg) 40%);
-}
-
-.shell--chat-focus .chat-compose {
-  bottom: calc(var(--shell-pad) + 8px);
-  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-  border-bottom-left-radius: var(--radius-lg);
-  border-bottom-right-radius: var(--radius-lg);
-}
-
-.chat-compose__field {
-  gap: 4px;
-}
-
-.chat-compose__field textarea {
-  min-height: 72px;
-  padding: 10px 14px;
-  border-radius: var(--radius-lg);
-  resize: vertical;
-  white-space: pre-wrap;
-  font-family: var(--font-body);
-  line-height: 1.5;
-  border: 1px solid var(--input);
-  background: var(--card);
-  box-shadow: inset 0 1px 0 var(--card-highlight);
-  transition:
-    border-color var(--duration-fast) ease,
-    box-shadow var(--duration-fast) ease;
-}
-
-.chat-compose__field textarea:focus {
-  border-color: var(--ring);
-  box-shadow: var(--focus-ring);
-}
-
-.chat-compose__field textarea:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.chat-compose__actions {
-  justify-content: flex-end;
-  align-self: end;
-}
 
 @media (max-width: 900px) {
   .chat-session {
