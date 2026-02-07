@@ -247,6 +247,21 @@ export const icons = {
       <line x1="12" x2="12.01" y1="8" y2="8" />
     </svg>
   `,
+  refresh: html`
+    <svg viewBox="0 0 24 24">
+      <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+      <path d="M21 3v5h-5" />
+    </svg>
+  `,
+  focus: html`
+    <svg viewBox="0 0 24 24">
+      <path d="M4 7V4h3" />
+      <path d="M20 7V4h-3" />
+      <path d="M4 17v3h3" />
+      <path d="M20 17v3h-3" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  `,
 } as const;
 
 export type IconName = keyof typeof icons;

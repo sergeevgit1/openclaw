@@ -3,7 +3,7 @@ import type { AppViewState } from "./app-view-state.ts";
 import type { UsageState } from "./controllers/usage.ts";
 import { parseAgentSessionKey } from "../../../src/routing/session-key.js";
 import { refreshChatAvatar } from "./app-chat.ts";
-import { renderChatControls, renderTab, renderThemeToggle } from "./app-render.helpers.ts";
+import { renderTab, renderThemeToggle } from "./app-render.helpers.ts";
 import { loadAgentFileContent, loadAgentFiles, saveAgentFile } from "./controllers/agent-files.ts";
 import { loadAgentIdentities, loadAgentIdentity } from "./controllers/agent-identity.ts";
 import { loadAgentSkills } from "./controllers/agent-skills.ts";
@@ -198,10 +198,9 @@ export function renderApp(state: AppViewState) {
         </div>
       </aside>
       <main class="content ${isChat ? "content--chat" : ""}">
-        ${state.lastError || isChat ? html`
+        ${state.lastError ? html`
         <section class="content-meta">
-          ${state.lastError ? html`<div class="pill danger">${state.lastError}</div>` : nothing}
-          ${isChat ? renderChatControls(state) : nothing}
+          <div class="pill danger">${state.lastError}</div>
         </section>` : nothing}
 
         ${
@@ -1088,6 +1087,16 @@ export function renderApp(state: AppViewState) {
                 error: state.lastError,
                 sessions: state.sessionsResult,
                 focusMode: chatFocus,
+                onToggleThinking: () => {
+                  if (!state.onboarding) {
+                    state.applySettings({
+                      ...state.settings,
+                      chatShowThinking: !state.settings.chatShowThinking,
+                    });
+                  }
+                },
+                disableThinkingToggle: state.onboarding,
+                disableFocusToggle: state.onboarding,
                 onRefresh: () => {
                   state.resetToolStream();
                   return Promise.all([loadChatHistory(state), refreshChatAvatar(state)]);

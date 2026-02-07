@@ -61,6 +61,16 @@ node openclaw.mjs gateway --port 5000 --bind lan --allow-unconfigured --verbose
 
 ## Recent Changes
 
+- 2026-02-07: Chat UI redesign — compact modern layout
+  - Chat compose area: icon buttons (+, send) inside input field with rounded container
+  - Toolbar above input: session selector, refresh, thinking toggle (brain), focus toggle
+  - Page titles moved from content area to topbar with info (i) icon tooltips
+  - New icons added to `ui/src/ui/icons.ts`: refresh, focus
+  - Removed old `renderChatControls` from `app-render.helpers.ts` (dead code cleanup)
+  - Content-meta section simplified to error display only
+  - CSS: `ui/src/styles/chat/layout.css` — toolbar, session select, icon button styles
+  - CSS: `ui/src/styles/layout.css` — topbar title with info icon
+
 - 2026-02-06: Complete Control UI russification
   - Translated all user-facing strings in ~60+ UI files from English to Russian
   - Covers: navigation, chat, overview, channels (WhatsApp/Telegram/Discord/Slack/Signal/iMessage/Google Chat/Nostr), sessions, agents, skills, nodes, config, usage, cron, logs, debug, exec-approval, settings, format/presenter utilities
