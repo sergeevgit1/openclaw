@@ -359,53 +359,55 @@ export function renderChat(props: ChatProps) {
 
       <div class="chat-compose">
         ${renderAttachmentPreview(props)}
-        <textarea
-          ${ref((el) => el && adjustTextareaHeight(el as HTMLTextAreaElement))}
-          .value=${props.draft}
-          ?disabled=${!props.connected}
-          @keydown=${(e: KeyboardEvent) => {
-            if (e.key !== "Enter") {
-              return;
-            }
-            if (e.isComposing || e.keyCode === 229) {
-              return;
-            }
-            if (e.shiftKey) {
-              return;
-            }
-            if (!props.connected) {
-              return;
-            }
-            e.preventDefault();
-            if (canCompose) {
-              props.onSend();
-            }
-          }}
-          @input=${(e: Event) => {
-            const target = e.target as HTMLTextAreaElement;
-            adjustTextareaHeight(target);
-            props.onDraftChange(target.value);
-          }}
-          @paste=${(e: ClipboardEvent) => handlePaste(e, props)}
-          placeholder=${composePlaceholder}
-        ></textarea>
-        <div class="chat-compose__actions">
-          <button
-            class="btn chat-compose__btn-session"
-            ?disabled=${!props.connected || (!canAbort && props.sending)}
-            @click=${canAbort ? props.onAbort : props.onNewSession}
-            title=${canAbort ? "Стоп" : "Новая сессия"}
-          >
-            ${canAbort ? icons.x : icons.plus}
-          </button>
-          <button
-            class="btn primary chat-compose__btn-send"
+        <div class="chat-compose__input-container">
+          <textarea
+            ${ref((el) => el && adjustTextareaHeight(el as HTMLTextAreaElement))}
+            .value=${props.draft}
             ?disabled=${!props.connected}
-            @click=${props.onSend}
-            title=${isBusy ? "В очередь" : "Отправить"}
-          >
-            ${isBusy ? icons.loader : icons.send || html`↑`}
-          </button>
+            @keydown=${(e: KeyboardEvent) => {
+              if (e.key !== "Enter") {
+                return;
+              }
+              if (e.isComposing || e.keyCode === 229) {
+                return;
+              }
+              if (e.shiftKey) {
+                return;
+              } // Allow Shift+Enter for line breaks
+              if (!props.connected) {
+                return;
+              }
+              e.preventDefault();
+              if (canCompose) {
+                props.onSend();
+              }
+            }}
+            @input=${(e: Event) => {
+              const target = e.target as HTMLTextAreaElement;
+              adjustTextareaHeight(target);
+              props.onDraftChange(target.value);
+            }}
+            @paste=${(e: ClipboardEvent) => handlePaste(e, props)}
+            placeholder=${composePlaceholder}
+          ></textarea>
+          <div class="chat-compose__actions">
+            <button
+              class="btn chat-compose__btn-session"
+              ?disabled=${!props.connected || (!canAbort && props.sending)}
+              @click=${canAbort ? props.onAbort : props.onNewSession}
+              title=${canAbort ? "Стоп" : "Новая сессия"}
+            >
+              ${canAbort ? icons.x : icons.plus}
+            </button>
+            <button
+              class="btn primary chat-compose__btn-send"
+              ?disabled=${!props.connected}
+              @click=${props.onSend}
+              title=${isBusy ? "В очередь" : "Отправить"}
+            >
+              ${isBusy ? icons.loader : icons.send || html`↑`}
+            </button>
+          </div>
         </div>
       </div>
     </section>
