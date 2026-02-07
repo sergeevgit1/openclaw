@@ -61,6 +61,15 @@ node openclaw.mjs gateway --port 5000 --bind lan --allow-unconfigured --verbose
 
 ## Recent Changes
 
+- 2026-02-07: Chat history panel
+  - Toggleable left sidebar showing past chat sessions sorted by last activity
+  - Each entry shows session name/label and relative timestamp (formatAgo)
+  - Click to switch sessions; active session highlighted with accent border
+  - Toggle button (history icon) added to chat toolbar
+  - State: `chatHistoryOpen` in app.ts, wired via `historyOpen`/`onToggleHistory` props
+  - CSS: `.chat-body`, `.chat-history-panel` in `ui/src/styles/chat/layout.css`
+  - New icon: `history` in `ui/src/ui/icons.ts`
+
 - 2026-02-07: Chat UI redesign — compact modern layout
   - Chat compose area: icon buttons (+, send) inside input field with rounded container
   - Toolbar above input: session selector, refresh, thinking toggle (brain), focus toggle
