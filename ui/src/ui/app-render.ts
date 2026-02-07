@@ -198,7 +198,7 @@ export function renderApp(state: AppViewState) {
         </div>
       </aside>
       <main class="content ${isChat ? "content--chat" : ""}">
-        ${state.lastError ? html`
+        ${state.lastError && state.connected ? html`
         <section class="content-meta">
           <div class="pill danger">${state.lastError}</div>
         </section>` : nothing}
@@ -1084,7 +1084,7 @@ export function renderApp(state: AppViewState) {
                 connected: state.connected,
                 canSend: state.connected,
                 disabledReason: chatDisabledReason,
-                error: state.lastError,
+                error: state.connected ? state.lastError : null,
                 sessions: state.sessionsResult,
                 focusMode: chatFocus,
                 onToggleThinking: () => {
