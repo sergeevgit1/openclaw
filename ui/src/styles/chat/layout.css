@@ -259,67 +259,77 @@
   justify-content: flex-end;
 }
 
-/* Compose input row - horizontal layout */
-.chat-compose__row {
+/* Compose input container - wraps textarea and actions */
+.chat-compose__input-container {
+  position: relative;
   display: flex;
-  align-items: stretch;
-  gap: 12px;
+  align-items: flex-end;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px;
+  transition: border-color 150ms ease;
+}
+
+.chat-compose__input-container:focus-within {
+  border-color: var(--accent);
+}
+
+.chat-compose__input-container textarea {
   flex: 1;
-}
-
-:root[data-theme="light"] .chat-compose {
-  background: linear-gradient(to bottom, transparent, var(--bg-content) 20%);
-}
-
-.chat-compose__field {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  align-items: stretch;
-}
-
-/* Hide the "Message" label - keep textarea only */
-.chat-compose__field > span {
-  display: none;
-}
-
-/* Override .field textarea min-height (180px) from components.css */
-.chat-compose .chat-compose__field textarea {
-  width: 100%;
-  height: 40px;
-  min-height: 40px;
-  max-height: 150px;
-  padding: 9px 12px;
-  border-radius: 8px;
-  overflow-y: auto;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 8px 12px !important;
+  margin: 0 !important;
   resize: none;
-  white-space: pre-wrap;
-  font-family: var(--font-body);
+  min-height: 40px;
+  max-height: 200px;
   font-size: 14px;
-  line-height: 1.45;
-}
-
-.chat-compose__field textarea:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
+  line-height: 1.5;
+  color: var(--text);
 }
 
 .chat-compose__actions {
-  flex-shrink: 0;
   display: flex;
-  align-items: stretch;
-  gap: 8px;
+  gap: 4px;
+  padding: 4px;
+  flex-shrink: 0;
 }
 
-.chat-compose .chat-compose__actions .btn {
-  padding: 0 16px;
-  font-size: 13px;
-  height: 40px;
-  min-height: 40px;
-  max-height: 40px;
-  line-height: 1;
-  white-space: nowrap;
-  box-sizing: border-box;
+.chat-compose__actions .btn {
+  width: 32px;
+  height: 32px;
+  padding: 0 !important;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+  background: transparent;
+  color: var(--muted);
+  transition: all 150ms ease;
+}
+
+.chat-compose__actions .btn:hover:not(:disabled) {
+  background: var(--panel-strong);
+  color: var(--text);
+  transform: scale(1.05);
+}
+
+.chat-compose__actions .btn.primary {
+  background: var(--accent);
+  color: var(--primary-foreground);
+}
+
+.chat-compose__actions .btn.primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  color: var(--primary-foreground);
+}
+
+.chat-compose__actions .btn svg {
+  width: 18px;
+  height: 18px;
 }
 
 /* Chat controls - moved to content-header area, left aligned */
