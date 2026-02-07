@@ -109,6 +109,15 @@
   height: 20px;
 }
 
+.topbar-page-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg);
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 1px solid var(--border);
+}
+
 /* Brand */
 .brand {
   display: flex;

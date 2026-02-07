@@ -141,6 +141,7 @@ export function renderApp(state: AppViewState) {
               <div class="brand-sub">Панель управления</div>
             </div>
           </div>
+          ${state.tab === "config" ? html`<div class="topbar-page-title">${titleForTab(state.tab)}</div>` : nothing}
         </div>
         <div class="topbar-status">
           <div class="pill">
@@ -197,6 +198,7 @@ export function renderApp(state: AppViewState) {
         </div>
       </aside>
       <main class="content ${isChat ? "content--chat" : ""}">
+        ${state.tab === "config" ? nothing : html`
         <section class="content-header">
           <div>
             ${state.tab === "usage" ? nothing : html`<div class="page-title">${titleForTab(state.tab)}</div>`}
@@ -206,7 +208,7 @@ export function renderApp(state: AppViewState) {
             ${state.lastError ? html`<div class="pill danger">${state.lastError}</div>` : nothing}
             ${isChat ? renderChatControls(state) : nothing}
           </div>
-        </section>
+        </section>`}
 
         ${
           state.tab === "overview"
