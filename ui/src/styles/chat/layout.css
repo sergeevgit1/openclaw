@@ -44,15 +44,22 @@
   position: relative !important;
   display: flex !important;
   align-items: flex-end !important;
-  background: var(--panel) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 12px !important;
+  background: var(--panel-strong, rgba(255, 255, 255, 0.08)) !important;
+  border: 1.5px solid var(--border, rgba(255, 255, 255, 0.15)) !important;
+  border-radius: 14px !important;
   padding: 4px !important;
-  transition: border-color 150ms ease !important;
+  transition: border-color 150ms ease, box-shadow 150ms ease !important;
 }
 
 .chat-compose__input-container:focus-within {
   border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb, 239, 68, 68), 0.15) !important;
+}
+
+:root[data-theme="light"] .chat-compose__input-container {
+  background: var(--card, #ffffff) !important;
+  border-color: var(--border, rgba(16, 24, 40, 0.15)) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
 }
 
 .chat-compose__input-container textarea {
