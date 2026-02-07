@@ -307,15 +307,6 @@ export function renderChat(props: ChatProps) {
 
   return html`
     <section class="card chat">
-      ${(props.disabledReason || props.error)
-        ? html`
-          <div class="chat-toast-container">
-            ${props.disabledReason ? html`<div class="chat-toast chat-toast--warn"><span>${props.disabledReason}</span></div>` : nothing}
-            ${props.error ? html`<div class="chat-toast chat-toast--danger"><span>${props.error}</span></div>` : nothing}
-          </div>
-        `
-        : nothing}
-
       ${renderCompactionIndicator(props.compactionStatus)}
 
       <div class="chat-compose__toolbar">
@@ -367,6 +358,15 @@ export function renderChat(props: ChatProps) {
           </button>
         </div>
       </div>
+
+      ${(props.disabledReason || props.error)
+        ? html`
+          <div class="chat-notice-strip">
+            ${props.disabledReason ? html`<span class="chat-notice chat-notice--warn">${props.disabledReason}</span>` : nothing}
+            ${props.error ? html`<span class="chat-notice chat-notice--danger">${props.error}</span>` : nothing}
+          </div>
+        `
+        : nothing}
 
       <div class="chat-body ${historyOpen ? "chat-body--history-open" : ""}">
         ${historyOpen ? renderHistoryPanel(props) : nothing}

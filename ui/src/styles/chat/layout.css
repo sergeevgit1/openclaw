@@ -339,63 +339,35 @@
   }
 }
 
-/* Toast notifications — floating in top-right of chat */
-.chat-toast-container {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  z-index: 100;
+/* Notice strip — compact inline bar between toolbar and chat body */
+.chat-notice-strip {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 6px;
-  max-width: 360px;
-  pointer-events: none;
+  padding: 4px 8px;
+  flex-shrink: 0;
 }
 
-.chat-toast {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-size: 12px;
+.chat-notice {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11px;
   line-height: 1.4;
-  pointer-events: auto;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-  animation: chat-toast-in 250ms ease-out;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.chat-toast--warn {
+.chat-notice--warn {
   background: var(--warn-subtle, rgba(245, 158, 11, 0.12));
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  border: 1px solid rgba(245, 158, 11, 0.2);
   color: var(--warn, #f59e0b);
 }
 
-.chat-toast--danger {
+.chat-notice--danger {
   background: var(--danger-subtle, rgba(239, 68, 68, 0.12));
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  border: 1px solid rgba(239, 68, 68, 0.2);
   color: var(--danger, #ef4444);
-}
-
-:root[data-theme="light"] .chat-toast {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
-@keyframes chat-toast-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 600px) {
-  .chat-toast-container {
-    max-width: calc(100% - 24px);
-    right: 8px;
-    top: 4px;
-  }
 }
