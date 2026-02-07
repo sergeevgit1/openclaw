@@ -1,5 +1,5 @@
 /* =============================================
-   CHAT CARD LAYOUT - Definitive Version
+   CHAT CARD LAYOUT
    ============================================= */
 
 .chat {
@@ -26,41 +26,30 @@
   background: transparent;
 }
 
-/* New Design: Buttons inside input field */
 .chat-compose {
   position: sticky !important;
   bottom: 0 !important;
   flex-shrink: 0 !important;
   display: flex !important;
-  flex-direction: column !important;
-  gap: 12px !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: flex-end !important;
+  gap: 0 !important;
   margin-top: auto !important;
-  padding: 12px 4px 4px !important;
-  background: var(--bg) !important;
+  padding: 8px 0 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   z-index: 99999 !important;
 }
 
-.chat-compose__input-container {
-  position: relative !important;
-  display: flex !important;
-  align-items: flex-end !important;
-  background: var(--panel) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 12px !important;
-  padding: 4px !important;
-  transition: border-color 150ms ease !important;
-}
-
-.chat-compose__input-container:focus-within {
-  border-color: var(--accent) !important;
-}
-
-.chat-compose__input-container textarea {
+.chat-compose > textarea {
   flex: 1 !important;
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
-  padding: 8px 12px !important;
+  outline: none !important;
+  padding: 8px 4px !important;
   margin: 0 !important;
   resize: none !important;
   min-height: 40px !important;
@@ -73,8 +62,9 @@
 .chat-compose__actions {
   display: flex !important;
   gap: 4px !important;
-  padding: 4px !important;
+  padding: 4px 0 !important;
   flex-shrink: 0 !important;
+  align-self: flex-end !important;
 }
 
 .chat-compose__actions .btn {
@@ -122,6 +112,7 @@
   border: 1px solid var(--border);
   width: fit-content;
   max-width: 100%;
+  flex-basis: 100%;
 }
 
 .chat-attachment {
