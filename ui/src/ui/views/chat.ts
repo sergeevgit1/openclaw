@@ -264,22 +264,6 @@ export function renderChat(props: ChatProps) {
 
       ${renderCompactionIndicator(props.compactionStatus)}
 
-      ${
-        props.focusMode
-          ? html`
-            <button
-              class="chat-focus-exit"
-              type="button"
-              @click=${props.onToggleFocusMode}
-              aria-label="Выйти из режима фокуса"
-              title="Выйти из режима фокуса"
-            >
-              ${icons.x}
-            </button>
-          `
-          : nothing
-      }
-
       <div class="chat-compose__toolbar">
         <div class="chat-compose__toolbar-left">
           <select
