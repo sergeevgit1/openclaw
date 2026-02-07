@@ -526,20 +526,16 @@
   gap: 8px;
 }
 
-/* Chat view header adjustments */
-.content--chat .content-header {
-  flex-direction: row;
+.content-meta {
+  display: flex;
   align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 8px;
+}
+
+.content--chat .content-meta {
   justify-content: space-between;
-  gap: 16px;
-}
-
-.content--chat .content-header > div:first-child {
-  text-align: left;
-}
-
-.content--chat .page-meta {
-  justify-content: flex-start;
 }
 
 .content--chat .chat-controls {

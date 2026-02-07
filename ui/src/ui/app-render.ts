@@ -141,7 +141,7 @@ export function renderApp(state: AppViewState) {
               <div class="brand-sub">Панель управления</div>
             </div>
           </div>
-          ${state.tab === "config" ? html`<div class="topbar-page-title">${titleForTab(state.tab)}<span class="topbar-info" title="${subtitleForTab(state.tab)}">${icons.infoCircle}</span></div>` : nothing}
+          ${state.tab !== "usage" ? html`<div class="topbar-page-title">${titleForTab(state.tab)}<span class="topbar-info" title="${subtitleForTab(state.tab)}">${icons.infoCircle}</span></div>` : nothing}
         </div>
         <div class="topbar-status">
           <div class="pill">
@@ -198,17 +198,11 @@ export function renderApp(state: AppViewState) {
         </div>
       </aside>
       <main class="content ${isChat ? "content--chat" : ""}">
-        ${state.tab === "config" ? nothing : html`
-        <section class="content-header">
-          <div>
-            ${state.tab === "usage" ? nothing : html`<div class="page-title">${titleForTab(state.tab)}</div>`}
-            ${state.tab === "usage" ? nothing : html`<div class="page-sub">${subtitleForTab(state.tab)}</div>`}
-          </div>
-          <div class="page-meta">
-            ${state.lastError ? html`<div class="pill danger">${state.lastError}</div>` : nothing}
-            ${isChat ? renderChatControls(state) : nothing}
-          </div>
-        </section>`}
+        ${state.lastError || isChat ? html`
+        <section class="content-meta">
+          ${state.lastError ? html`<div class="pill danger">${state.lastError}</div>` : nothing}
+          ${isChat ? renderChatControls(state) : nothing}
+        </section>` : nothing}
 
         ${
           state.tab === "overview"
