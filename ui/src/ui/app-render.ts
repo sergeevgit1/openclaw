@@ -141,7 +141,7 @@ export function renderApp(state: AppViewState) {
               <div class="brand-sub">Панель управления</div>
             </div>
           </div>
-          ${state.tab === "config" ? html`<div class="topbar-page-title">${titleForTab(state.tab)}</div>` : nothing}
+          ${state.tab === "config" ? html`<div class="topbar-page-title">${titleForTab(state.tab)}<span class="topbar-info" title="${subtitleForTab(state.tab)}">${icons.infoCircle}</span></div>` : nothing}
         </div>
         <div class="topbar-status">
           <div class="pill">
