@@ -359,15 +359,6 @@ export function renderChat(props: ChatProps) {
         </div>
       </div>
 
-      ${(props.disabledReason || props.error)
-        ? html`
-          <div class="chat-notice-strip">
-            ${props.disabledReason ? html`<span class="chat-notice chat-notice--warn">${props.disabledReason}</span>` : nothing}
-            ${props.error ? html`<span class="chat-notice chat-notice--danger">${props.error}</span>` : nothing}
-          </div>
-        `
-        : nothing}
-
       <div class="chat-body ${historyOpen ? "chat-body--history-open" : ""}">
         ${historyOpen ? renderHistoryPanel(props) : nothing}
         <div class="chat-body__main">

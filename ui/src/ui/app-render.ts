@@ -144,11 +144,8 @@ export function renderApp(state: AppViewState) {
           ${state.tab !== "usage" ? html`<div class="topbar-page-title">${titleForTab(state.tab)}<span class="topbar-info" title="${subtitleForTab(state.tab)}">${icons.infoCircle}</span></div>` : nothing}
         </div>
         <div class="topbar-status">
-          <div class="pill">
-            <span class="statusDot ${state.connected ? "ok" : ""}"></span>
-            <span>Состояние</span>
-            <span class="mono">${state.connected ? "ОК" : "Офлайн"}</span>
-          </div>
+          ${state.lastError ? html`<div class="pill danger">${state.lastError}</div>` : nothing}
+          ${!state.connected ? html`<div class="pill danger"><span class="statusDot"></span><span>Офлайн</span></div>` : html`<div class="pill"><span class="statusDot ok"></span><span>Состояние</span><span class="mono">ОК</span></div>`}
           ${renderThemeToggle(state)}
         </div>
       </header>
@@ -198,10 +195,6 @@ export function renderApp(state: AppViewState) {
         </div>
       </aside>
       <main class="content ${isChat ? "content--chat" : ""}">
-        ${state.lastError && state.connected ? html`
-        <section class="content-meta">
-          <div class="pill danger">${state.lastError}</div>
-        </section>` : nothing}
 
         ${
           state.tab === "overview"
