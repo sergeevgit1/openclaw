@@ -127,9 +127,9 @@
   justify-content: center;
   width: 16px;
   height: 16px;
-  color: var(--fg-muted);
+  color: var(--fg);
   cursor: help;
-  opacity: 0.5;
+  opacity: 0.4;
   transition: opacity 0.15s ease;
 }
 
