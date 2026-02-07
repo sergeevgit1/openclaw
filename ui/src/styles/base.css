@@ -70,7 +70,7 @@
 
   /* Focus - With glow */
   --focus: rgba(255, 92, 92, 0.25);
-  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring);
+  --focus-ring: 0 0 0 2px var(--ring);
   --focus-glow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ring), 0 0 20px var(--accent-glow);
 
   /* Grid */
