@@ -164,7 +164,7 @@ function renderPairedDevice(device: PairedDevice, props: NodesProps) {
   const scopes = `области: ${formatList(device.scopes)}`;
   const tokens = Array.isArray(device.tokens) ? device.tokens : [];
   return html`
-    <div class="list-item">
+    <div class="list-item" style="grid-template-columns: 1fr;">
       <div class="list-main">
         <div class="list-title">${name}</div>
         <div class="list-sub">${device.deviceId}${ip}</div>
