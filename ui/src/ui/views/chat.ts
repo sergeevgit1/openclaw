@@ -362,48 +362,6 @@ export function renderChat(props: ChatProps) {
       }
 
       <div class="chat-compose">
-        <div class="chat-compose__toolbar">
-          <div class="chat-compose__toolbar-left">
-            <select
-              class="chat-compose__session-select"
-              .value=${props.sessionKey}
-              ?disabled=${!props.connected}
-              @change=${(e: Event) => {
-                props.onSessionKeyChange((e.target as HTMLSelectElement).value);
-              }}
-            >
-              ${props.sessions?.sessions?.map(
-                (s) => html`<option value=${s.key}>${s.label?.trim() || s.displayName?.trim() || s.key}</option>`,
-              ) ?? html`<option value=${props.sessionKey}>${props.sessionKey}</option>`}
-            </select>
-            <button
-              class="btn btn--sm btn--icon"
-              ?disabled=${!props.connected}
-              @click=${props.onRefresh}
-              title="Обновить данные чата"
-            >
-              ${icons.refresh}
-            </button>
-          </div>
-          <div class="chat-compose__toolbar-right">
-            <button
-              class="btn btn--sm btn--icon ${props.showThinking ? "active" : ""}"
-              ?disabled=${props.disableThinkingToggle}
-              @click=${props.onToggleThinking}
-              title="Показать/скрыть размышления"
-            >
-              ${icons.brain}
-            </button>
-            <button
-              class="btn btn--sm btn--icon ${props.focusMode ? "active" : ""}"
-              ?disabled=${props.disableFocusToggle}
-              @click=${props.onToggleFocusMode}
-              title="Режим фокуса"
-            >
-              ${icons.focus}
-            </button>
-          </div>
-        </div>
         ${renderAttachmentPreview(props)}
         <div class="chat-compose__input-container">
           <textarea
@@ -452,6 +410,48 @@ export function renderChat(props: ChatProps) {
               title=${isBusy ? "В очередь" : "Отправить"}
             >
               ${isBusy ? icons.loader : icons.send || html`↑`}
+            </button>
+          </div>
+        </div>
+        <div class="chat-compose__toolbar">
+          <div class="chat-compose__toolbar-left">
+            <select
+              class="chat-compose__session-select"
+              .value=${props.sessionKey}
+              ?disabled=${!props.connected}
+              @change=${(e: Event) => {
+                props.onSessionKeyChange((e.target as HTMLSelectElement).value);
+              }}
+            >
+              ${props.sessions?.sessions?.map(
+                (s) => html`<option value=${s.key}>${s.label?.trim() || s.displayName?.trim() || s.key}</option>`,
+              ) ?? html`<option value=${props.sessionKey}>${props.sessionKey}</option>`}
+            </select>
+            <button
+              class="btn btn--sm btn--icon"
+              ?disabled=${!props.connected}
+              @click=${props.onRefresh}
+              title="Обновить данные чата"
+            >
+              ${icons.refresh}
+            </button>
+          </div>
+          <div class="chat-compose__toolbar-right">
+            <button
+              class="btn btn--sm btn--icon ${props.showThinking ? "active" : ""}"
+              ?disabled=${props.disableThinkingToggle}
+              @click=${props.onToggleThinking}
+              title="Показать/скрыть размышления"
+            >
+              ${icons.brain}
+            </button>
+            <button
+              class="btn btn--sm btn--icon ${props.focusMode ? "active" : ""}"
+              ?disabled=${props.disableFocusToggle}
+              @click=${props.onToggleFocusMode}
+              title="Режим фокуса"
+            >
+              ${icons.focus}
             </button>
           </div>
         </div>
