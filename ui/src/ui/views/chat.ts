@@ -200,9 +200,9 @@ export function renderChat(props: ChatProps) {
   const hasAttachments = (props.attachments?.length ?? 0) > 0;
   const composePlaceholder = props.connected
     ? hasAttachments
-      ? "Введите сообщение или вставьте изображения..."
-      : "Сообщение (↩ отправить, Shift+↩ перенос строки, вставка изображений)"
-    : "Подключитесь к шлюзу, чтобы начать общение…";
+      ? "Введите сообщение..."
+      : "Введите сообщение..."
+    : "Подключитесь к шлюзу...";
 
   const splitRatio = props.splitRatio ?? 0.6;
   const sidebarOpen = Boolean(props.sidebarOpen && props.onCloseSidebar);

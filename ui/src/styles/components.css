@@ -1323,10 +1323,9 @@
   text-align: right;
 }
 
-/* Chat compose - redundant, using chat/layout.css */
-.chat-compose {
-  display: none;
-}
+/* Chat compose - DEFINITIVELY REMOVED */
+.chat-compose { display: none !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; overflow: hidden !important; }
+.chat-compose__field, .chat-compose__actions { display: none !important; }
 
 
 @media (max-width: 900px) {
