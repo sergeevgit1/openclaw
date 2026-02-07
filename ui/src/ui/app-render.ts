@@ -1131,6 +1131,10 @@ export function renderApp(state: AppViewState) {
                 onSplitRatioChange: (ratio: number) => state.handleSplitRatioChange(ratio),
                 assistantName: state.assistantName,
                 assistantAvatar: state.assistantAvatar,
+                historyOpen: state.chatHistoryOpen,
+                onToggleHistory: () => {
+                  state.chatHistoryOpen = !state.chatHistoryOpen;
+                },
               })
             : nothing
         }

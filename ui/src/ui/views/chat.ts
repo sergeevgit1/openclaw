@@ -1,9 +1,10 @@
 import { html, nothing } from "lit";
 import { ref } from "lit/directives/ref.js";
 import { repeat } from "lit/directives/repeat.js";
-import type { SessionsListResult } from "../types.ts";
+import type { GatewaySessionRow, SessionsListResult } from "../types.ts";
 import type { ChatItem, MessageGroup } from "../types/chat-types.ts";
 import type { ChatAttachment, ChatQueueItem } from "../ui-types.ts";
+import { formatAgo } from "../format.ts";
 import {
   renderMessageGroup,
   renderReadingIndicatorGroup,
@@ -60,6 +61,9 @@ export type ChatProps = {
   onToggleThinking: () => void;
   disableThinkingToggle?: boolean;
   disableFocusToggle?: boolean;
+  // History panel
+  historyOpen?: boolean;
+  onToggleHistory?: () => void;
   // Event handlers
   onRefresh: () => void;
   onToggleFocusMode: () => void;
@@ -189,6 +193,50 @@ function renderAttachmentPreview(props: ChatProps) {
   `;
 }
 
+function renderHistoryPanel(props: ChatProps) {
+  const sessions = props.sessions?.sessions ?? [];
+  const sorted = [...sessions].sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0));
+
+  return html`
+    <aside class="chat-history-panel">
+      <div class="chat-history-panel__header">
+        <span class="chat-history-panel__title">История чатов</span>
+        <button
+          class="btn btn--sm btn--icon"
+          @click=${props.onToggleHistory}
+          title="Закрыть историю"
+        >
+          ${icons.x}
+        </button>
+      </div>
+      <div class="chat-history-panel__list">
+        ${sorted.length === 0
+          ? html`<div class="chat-history-panel__empty">Нет сессий</div>`
+          : sorted.map(
+              (s) => html`
+                <button
+                  class="chat-history-panel__item ${s.key === props.sessionKey ? "chat-history-panel__item--active" : ""}"
+                  @click=${() => {
+                    if (s.key !== props.sessionKey) {
+                      props.onSessionKeyChange(s.key);
+                    }
+                  }}
+                >
+                  <div class="chat-history-panel__item-name">
+                    ${s.label?.trim() || s.displayName?.trim() || s.key}
+                  </div>
+                  <div class="chat-history-panel__item-meta">
+                    ${s.updatedAt ? formatAgo(s.updatedAt) : ""}
+                    ${s.surface ? html`<span class="chat-history-panel__surface">${s.surface}</span>` : nothing}
+                  </div>
+                </button>
+              `,
+            )}
+      </div>
+    </aside>
+  `;
+}
+
 export function renderChat(props: ChatProps) {
   const canCompose = props.connected;
   const isBusy = props.sending || props.stream !== null;
@@ -210,6 +258,7 @@ export function renderChat(props: ChatProps) {
 
   const splitRatio = props.splitRatio ?? 0.6;
   const sidebarOpen = Boolean(props.sidebarOpen && props.onCloseSidebar);
+  const historyOpen = Boolean(props.historyOpen);
   const thread = html`
     <div
       class="chat-thread"
@@ -266,6 +315,13 @@ export function renderChat(props: ChatProps) {
 
       <div class="chat-compose__toolbar">
         <div class="chat-compose__toolbar-left">
+          <button
+            class="btn btn--sm btn--icon ${historyOpen ? "active" : ""}"
+            @click=${props.onToggleHistory}
+            title="История чатов"
+          >
+            ${icons.history}
+          </button>
           <select
             class="chat-compose__session-select"
             .value=${props.sessionKey}
@@ -307,6 +363,9 @@ export function renderChat(props: ChatProps) {
         </div>
       </div>
 
+      <div class="chat-body ${historyOpen ? "chat-body--history-open" : ""}">
+        ${historyOpen ? renderHistoryPanel(props) : nothing}
+        <div class="chat-body__main">
       <div
         class="chat-split-container ${sidebarOpen ? "chat-split-container--open" : ""}"
       >
@@ -439,6 +498,8 @@ export function renderChat(props: ChatProps) {
               ${isBusy ? icons.loader : icons.send || html`↑`}
             </button>
           </div>
+        </div>
+      </div>
         </div>
       </div>
     </section>
